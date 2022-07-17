@@ -25,7 +25,7 @@ game_over_font = pygame.font.SysFont('Bauhaus 93', 100)
 tile_size = 50
 game_over = False
 main_menu = True
-level = 3
+level = 0
 max_level = 7
 score = 0
 
@@ -363,7 +363,7 @@ diamond_group = pygame.sprite.Group()
 door_group = pygame.sprite.Group()
 
 if path.exists(f'/home/gloaty/Desktop/Coding/Code Metro/platformer'):
-	pickle_in = open(f'level{level}_data', 'rb')
+	pickle_in = open(f'/home/gloaty/Desktop/Coding/Code Metro/platformer/level{level}_data', 'rb')
 	world_data = pickle.load(pickle_in)
 world = World(world_data)
 
@@ -421,6 +421,10 @@ while run:
                 world_data = []
                 world = reset_level(level)
                 game_over = 0
+                if path.exists(f'/home/gloaty/Desktop/Coding/Code Metro/platformer'):
+                    pickle_in = open(f'/home/gloaty/Desktop/Coding/Code Metro/platformer/level{level}_data', 'rb')
+                    world_data = pickle.load(pickle_in)
+                world = World(world_data)
             else:
                 draw_text('YOU WIN!', game_over_font, cyan, (screen_width//2) - 140, screen_height//2)
                 if restart_button.draw():
